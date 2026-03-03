@@ -44,6 +44,9 @@ function prettyPrint(node, prefix = '', isLeft = true) {
     }
 
     prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
-    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
 }
+
+const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+prettyPrint(tree.root);
