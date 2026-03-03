@@ -8,7 +8,7 @@ class Node {
 
 export class Tree {
     constructor(numArray) {
-        this.root = this.buildTree(numArray);
+        this.root = this.#buildTree(numArray);
     }
 
     /**
@@ -18,7 +18,7 @@ export class Tree {
      * @param {number[]} numArray - An array of numbers to be converted into a BST.
      * @returns {Node | null} The root Node of the BST or null if there is none.
      */
-    buildTree(numArray) {
+    #buildTree(numArray) {
         const uniqueNumbers = new Set(numArray);
         const sortedArray = [...uniqueNumbers].sort((a, b) => a - b);
 
