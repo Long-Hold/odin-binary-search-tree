@@ -38,7 +38,15 @@ export class Tree {
     }
 
     includes(value) {
-        if (value === this.root.value) return true;
+        function findValue(value, currentNode) {
+            if (currentNode === null) return false;
+            if (value === currentNode.value) return true;
+
+            const nextNode = (value > currentNode.value) ? currentNode.right : currentNode.left;
+            return findValue(value, nextNode);
+        }
+
+        return findValue(value, this.root);
     }
 }
 
