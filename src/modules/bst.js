@@ -36,6 +36,10 @@ export class Tree {
 
         return arrayToBST(sortedArray, 0, sortedArray.length - 1);
     }
+
+    includes(value) {
+        if (value === this.root.value) return true;
+    }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {

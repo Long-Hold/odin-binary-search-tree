@@ -8,6 +8,9 @@ describe('class Tree', () => {
     });
 
     describe('Tree.includes()', () => {
-        
+        test('returns true if the value is the root node', () => {
+            const rootVal = tree.root.value;
+            expect(tree.includes(rootVal)).toBe(true);
+        });
     });
 });
