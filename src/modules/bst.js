@@ -5,3 +5,13 @@ class Node {
         this.right = right;
     }
 }
+
+export class Tree {
+    constructor(numArray) {
+        this.root = this.buildTree(numArray);
+    }
+
+    buildTree(numArray) {
+        
+    }
+}
