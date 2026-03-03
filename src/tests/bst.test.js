@@ -12,5 +12,9 @@ describe('class Tree', () => {
             const rootVal = tree.root.value;
             expect(tree.includes(rootVal)).toBe(true);
         });
+        test('returns true for any value that exists in the tree', () => {
+            const arrSet = new Set(startingArray);
+            for (const value of arrSet) expect(tree.includes(value)).toBe(true);
+        });
     });
 });
