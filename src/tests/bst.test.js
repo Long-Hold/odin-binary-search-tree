@@ -294,5 +294,14 @@ describe('class Tree', () => {
             tree.deleteItem(4);
             expect(tree.depth(4)).toBe(undefined);
         });
+        test.each([
+            {input: 8, result: 0},
+            {input: 7, result: 3},
+            {input: 1, result: 2},
+            {input: 9, result: 2},
+            {input: 6345, result: 3},
+        ])('returns $result when passed $input', ({input, result}) => {
+            expect(tree.depth(input)).toBe(result);
+        })
     });
 });
