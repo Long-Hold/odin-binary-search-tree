@@ -60,3 +60,5 @@ tree.postOrderForEach(logFunc);
 
 console.log('In Order: ');
 tree.inOrderForEach(logFunc);
+
+prettyPrint(tree.root);
