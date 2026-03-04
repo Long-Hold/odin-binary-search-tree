@@ -23,10 +23,15 @@ describe('class Tree', () => {
         });
     });
     describe('Tree.insert()', () => {
-        test('inserts a value into the tree', () => {
-            expect(tree.includes(9999)).toBe(false);
-            tree.insert(9999);
-            expect(tree.includes(9999)).toBe(true);
+        test('inserts a value into the tree on the left and right of a node', () => {
+            const arr = [22,12,30,8,20,30];
+            const newTree = new Tree(arr);
+            for (let i = 0; i < arr.length; ++i) expect(newTree.includes(arr[i])).toBe(true);
+            newTree.insert(15);
+            newTree.insert(17);
+            expect(newTree.includes(15)).toBe(true);
+            expect(newTree.includes(17)).toBe(true);
+            for (let i = 0; i < arr.length; ++i) expect(newTree.includes(arr[i])).toBe(true);
         });
     });
     describe('Tree.deleteItem()', () => {
