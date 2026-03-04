@@ -54,5 +54,19 @@ describe('class Tree', () => {
             const newArr = arr.filter(item => item !== valueToRemove);
             for (let i = 0; i < newArr.length; ++i) expect(oneChildTree.includes(newArr[i])).toBe(true);
         });
+        test('deleted node has 2 children, or is the root node', () => {
+            const arr = [50,30,70,20,40,60,80];
+            const twoChildTree = new Tree(arr);
+            for (let i = 0; i < arr.length; ++i) expect(twoChildTree.includes(arr[i])).toBe(true);
+            expect(twoChildTree.root.value).toBe(50);
+
+            const valueToRemove = arr[0];
+            twoChildTree.deleteItem(valueToRemove);
+            expect(twoChildTree.includes(valueToRemove)).toBe(false);
+            expect(twoChildTree.root.value).toBe(60);
+
+            const newArr = arr.filter(item => item !== valueToRemove);
+            for (let i = 0; i < newArr.length; ++i) expect(twoChildTree.includes(newArr[i])).toBe(true);
+        });
     });
 });
