@@ -55,6 +55,26 @@ export class Tree {
 
         return findValue(value, this.root);
     }
+
+    /**
+     * Inserts a new value into the BST by recursively finding an empty space that maintains
+     * the BST principal.
+     * 
+     * @param {number} value - The value to insert into the BST 
+     * @returns {this} An instance of the object for chaining.
+     */
+    insert(value) {
+        function appendToBranchEnd(value, currentNode) {
+            if (currentNode === null) return new Node(value);
+            if (value > currentNode.value) currentNode.right = appendToBranchEnd(value, currentNode.right);
+            else currentNode.left = appendToBranchEnd(value, currentNode.left);
+
+            return currentNode;
+        }
+
+        appendToBranchEnd(value, this.root);
+        return this;
+    }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
@@ -66,6 +86,3 @@ function prettyPrint(node, prefix = '', isLeft = true) {
     console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
 }
-
-const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-prettyPrint(tree.root);

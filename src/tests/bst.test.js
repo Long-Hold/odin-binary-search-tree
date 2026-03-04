@@ -22,4 +22,11 @@ describe('class Tree', () => {
             expect(tree.includes(25)).toBe(false);
         });
     });
+    describe('Tree.insert()', () => {
+        test('inserts a value into the tree', () => {
+            expect(tree.includes(9999)).toBe(false);
+            tree.insert(9999);
+            expect(tree.includes(9999)).toBe(true);
+        });
+    });
 });
