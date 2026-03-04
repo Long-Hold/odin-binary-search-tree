@@ -30,16 +30,17 @@ describe('class Tree', () => {
         });
     });
     describe('Tree.deleteItem()', () => {
-        test('deletes specified item from the tree', () => {
-            const arrSet = new Set(startingArray);
-            for (const value of arrSet) expect(tree.includes(value)).toBe(true);
+        test('deletes node with no children', () => {
+            const arr = [50,30,70,20,40,60,80];
+            const noChildTree = new Tree(arr);
+            for (let i = 0; i < arr.length; ++i) expect(noChildTree.includes(arr[i])).toBe(true);
 
-            const valToRemove = 123123
-            tree.insert(valToRemove);
-            expect(tree.includes(valToRemove)).toBe(true);
-            tree.deleteItem(valToRemove);
-            expect(tree.includes(valToRemove)).toBe(false);
-            for (const value of arrSet) expect(tree.includes(value)).toBe(true);
+            const valueToRemove = arr[4];
+            noChildTree.deleteItem(valueToRemove);
+            expect(noChildTree.includes(valueToRemove)).toBe(false);
+
+            const newArr = arr.filter(item => item !== valueToRemove);
+            for (let i = 0; i < newArr.length; ++i) expect(noChildTree.includes(newArr[i])).toBe(true);
         });
     });
 });
