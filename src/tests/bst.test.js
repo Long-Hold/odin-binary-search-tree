@@ -257,4 +257,35 @@ describe('class Tree', () => {
             expect(received).toEqual([1, 3, 2, 5, 7, 6, 4]);
         });
     });
+    describe('Tree.height()', () => {
+        test('returns undefined if the value does not exist in the tree', () => {
+            expect(tree.height(9999)).toBe(undefined);
+            expect(tree.height(12312)).toBe(undefined);
+        });
+        test('returns expected height of 3 for root node', () => {
+            expect(tree.height(8)).toBe(3);
+        });
+        test.each([
+            { input: 3,   result: 0 },
+            { input: 4,   result: 2 },
+            { input: 324, result: 1 },
+            { input: 23,  result: 0 },
+            { input: 67,  result: 2 },
+        ])('returns height $result for value $input', ({ input, result }) => {
+            expect(tree.height(input)).toBe(result);
+        });
+        test('returns correct height after inserting a new deepest node', () => {
+            // 8 currently has height 3, its deepest path ends at 3
+            // inserting 2 extends that path: 8 → 4 → 1 → 3 → 2
+            tree.insert(2);
+            expect(tree.height(8)).toBe(4);
+        });
+        test('returns correct height after deleting a node', () => {
+            // 4 currently has height 2 (4 → 1 → 3)
+            // deleting 3 reduces it: 4 → 1
+            tree.deleteItem(3);
+            tree.deleteItem(7);
+            expect(tree.height(4)).toBe(1);
+        });
+    });
 });
