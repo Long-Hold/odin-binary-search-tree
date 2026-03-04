@@ -205,4 +205,22 @@ export class Tree {
         postOrderTraversal(this.root, callBack);
         return this;
     }
+
+    height(value) {
+        if (!this.includes(value)) return undefined;
+
+        // Traverse the tree to store reference to the specified node.
+        let currentNode = this.root;
+        while (currentNode.value !== value) {
+            if (value < currentNode.value) currentNode = currentNode.left;
+            else currentNode = currentNode.right;
+        }
+
+        function findHeight(root) {
+            if (!root) return - 1;
+            return 1 + Math.max(findHeight(root.left), findHeight(root.right));
+        }
+
+        return findHeight(currentNode);
+    }
 }
