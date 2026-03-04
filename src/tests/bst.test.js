@@ -29,4 +29,17 @@ describe('class Tree', () => {
             expect(tree.includes(9999)).toBe(true);
         });
     });
+    describe('Tree.deleteItem()', () => {
+        test('deletes specified item from the tree', () => {
+            const arrSet = new Set(startingArray);
+            for (const value of arrSet) expect(tree.includes(value)).toBe(true);
+
+            const valToRemove = 123123
+            tree.insert(valToRemove);
+            expect(tree.includes(valToRemove)).toBe(true);
+            tree.deleteItem(valToRemove);
+            expect(tree.includes(valToRemove)).toBe(false);
+            for (const value of arrSet) expect(tree.includes(value)).toBe(true);
+        });
+    });
 });

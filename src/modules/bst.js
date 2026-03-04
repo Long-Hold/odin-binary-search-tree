@@ -75,6 +75,37 @@ export class Tree {
         appendToBranchEnd(value, this.root);
         return this;
     }
+
+    deleteItem(value) {
+        function getSuccessor(currentNode) {
+            currentNode = currentNode.right;
+            while (currentNode !== null && currentNode.left !== null) 
+                currentNode = currentNode.left;
+            return currentNode;
+        }
+
+        function deleteNode(currentNode, value) {
+            if (currentNode === null) return currentNode;
+
+            if (value < currentNode.value) currentNode.left = deleteNode(currentNode.left, value);
+            else if (value > currentNode.value) currentNode.right = deleteNode(currentNode.right, value);
+            else {
+                // Node with 0 or 1 child
+                if (currentNode.left === null) return currentNode.right;
+                if (currentNode.right === null) return currentNode.left;
+
+                // Node with 2 children
+                const sucessor = getSuccessor(currentNode);
+                currentNode.value = sucessor.value;
+                currentNode.right = deleteNode(currentNode.right, sucessor.value);
+            }
+
+            return currentNode;
+        }
+
+        deleteNode(this.root, value);
+        return this;
+    }
 }
 
 function prettyPrint(node, prefix = '', isLeft = true) {
