@@ -163,4 +163,25 @@ export class Tree {
         inOrderTraversal(this.root, callBack);
         return this;
     }
+
+    /**
+     * Calls a callback function on each node's value in pre-order.
+     * 
+     * @param {Function} callBack - The function to be called on each Node's value.
+     * @returns {this} An instance of the object for chaining.
+     */
+    preOrderForEach(callBack) {
+        if (typeof callBack !== 'function')
+            throw new TypeError('method must be passed a call back Function');
+
+        function preOrderTraversal(root, callBack) {
+            if (!root) return;
+            callBack(root.value);
+            preOrderTraversal(root.left, callBack);
+            preOrderTraversal(root.right, callBack);
+        }
+
+        preOrderTraversal(this.root, callBack);
+        return this;
+    }
 }

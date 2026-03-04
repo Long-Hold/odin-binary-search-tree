@@ -164,4 +164,14 @@ describe('class Tree', () => {
             expect(received).toEqual(sorted);
         });
     });
+    describe('Tree.preOrderForEach()', () => {
+        test('throws an Error when no callback is provided', () => {
+            expect(() => tree.preOrderForEach()).toThrow();
+        });
+        test.each([
+            1, [], 'name', {}
+        ])('throws TypeError when passed "%s" to callBack parameter', (input) => {
+            expect(() => tree.preOrderForEach(input)).toThrow(TypeError);
+        });
+    })
 });
