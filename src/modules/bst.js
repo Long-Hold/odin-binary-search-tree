@@ -37,6 +37,13 @@ export class Tree {
         return arrayToBST(sortedArray, 0, sortedArray.length - 1);
     }
 
+    /**
+     * Traverses the Binary Search Tree using a form of Binary Search to locate the passed value.
+     * If the passed value is found, returns true or otherwise false.
+     * 
+     * @param {number} value - The value of the node to search for in the BST. 
+     * @returns {boolean} Returns true if value found, returns false if not.
+     */
     includes(value) {
         function findValue(value, currentNode) {
             if (currentNode === null) return false;
