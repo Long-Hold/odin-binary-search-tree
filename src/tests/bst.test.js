@@ -117,34 +117,34 @@ describe('class Tree', () => {
         ])('throws TypeError when passed "%s" to callBack parameter', (input) => {
             expect(() => tree.levelOrderForEach(input)).toThrow(TypeError);
         });
-    test('calls callback with values, not Node objects', () => {
-        const callback = jest.fn();
-        tree.levelOrderForEach(callback);
+        test('calls callback with values, not Node objects', () => {
+            const callback = jest.fn();
+            tree.levelOrderForEach(callback);
 
-        callback.mock.calls.forEach(([arg]) => {
-            expect(typeof arg).toBe('number'); // or whatever your value type is
+            callback.mock.calls.forEach(([arg]) => {
+                expect(typeof arg).toBe('number'); // or whatever your value type is
+            });
         });
-    });
-    test('traverses in level-order (BFS)', () => {
-        const simpleArr = [4, 2, 6, 1, 3, 5, 7];
-        const simpleTree = new Tree(simpleArr);
-        //       4
-        //      / \
-        //     2   6
-        //    / \ / \
-        //   1  3 5  7
+        test('traverses in level-order (BFS)', () => {
+            const simpleArr = [4, 2, 6, 1, 3, 5, 7];
+            const simpleTree = new Tree(simpleArr);
+            //       4
+            //      / \
+            //     2   6
+            //    / \ / \
+            //   1  3 5  7
 
-        const received = [];
-        simpleTree.levelOrderForEach(val => received.push(val));
+            const received = [];
+            simpleTree.levelOrderForEach(val => received.push(val));
 
-        expect(received).toEqual([4, 2, 6, 1, 3, 5, 7]);
-    });
-    test('calls callback exactly once per unique node', () => {
-        const callback = jest.fn();
-        tree.levelOrderForEach(callback);
+            expect(received).toEqual([4, 2, 6, 1, 3, 5, 7]);
+        });
+        test('calls callback exactly once per unique node', () => {
+            const callback = jest.fn();
+            tree.levelOrderForEach(callback);
 
-        const uniqueValues = new Set(startingArray);
-        expect(callback).toHaveBeenCalledTimes(uniqueValues.size);
-    });
+            const uniqueValues = new Set(startingArray);
+            expect(callback).toHaveBeenCalledTimes(uniqueValues.size);
+        });
     });
 });
