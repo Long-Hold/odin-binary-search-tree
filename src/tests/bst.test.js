@@ -217,5 +217,44 @@ describe('class Tree', () => {
 
             expect(received).toEqual([4, 2, 1, 3, 6, 5, 7]);
         });
-    })
+    });
+    describe('Tree.postOrderForEach()', () => {
+        test('throws an Error when no callback is provided', () => {
+            expect(() => tree.postOrderForEach()).toThrow();
+        });
+        test.each([
+            1, [], 'name', {}
+        ])('throws TypeError when passed "%s" to callBack parameter', (input) => {
+            expect(() => tree.postOrderForEach(input)).toThrow(TypeError);
+        });
+        test('calls callback with values, not Node objects', () => {
+            const callback = jest.fn();
+            tree.postOrderForEach(callback);
+
+            callback.mock.calls.forEach(([arg]) => {
+                expect(typeof arg).toBe('number');
+            });
+        });
+        test('calls callback exactly once per unique node', () => {
+            const callback = jest.fn();
+            tree.postOrderForEach(callback);
+
+            const uniqueValues = new Set(startingArray);
+            expect(callback).toHaveBeenCalledTimes(uniqueValues.size);
+        });
+        test('traverses in post-order (left subtree, right subtree, root)', () => {
+            const simpleArr = [4, 2, 6, 1, 3, 5, 7];
+            const simpleTree = new Tree(simpleArr);
+            //       4
+            //      / \
+            //     2   6
+            //    / \ / \
+            //   1  3 5  7
+
+            const received = [];
+            simpleTree.postOrderForEach(val => received.push(val));
+
+            expect(received).toEqual([1, 3, 2, 5, 7, 6, 4]);
+        });
+    });
 });
