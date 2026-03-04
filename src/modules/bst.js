@@ -60,10 +60,13 @@ export class Tree {
      * Inserts a new value into the BST by recursively finding an empty space that maintains
      * the BST principal.
      * 
+     * Duplicate value insertions are ignored.
+     * 
      * @param {number} value - The value to insert into the BST 
      * @returns {this} An instance of the object for chaining.
      */
     insert(value) {
+        if (this.includes(value)) return this;
         function appendToBranchEnd(value, currentNode) {
             if (currentNode === null) return new Node(value);
             if (value > currentNode.value) currentNode.right = appendToBranchEnd(value, currentNode.right);
