@@ -10,17 +10,53 @@ function prettyPrint(node, prefix = '', isLeft = true) {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
 }
 
-const startingArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const tree = new Tree(startingArray);
-prettyPrint(tree.root);
+function oneHundredRandomNumbers() {
+    const arr = [];
+    for (let i = 0; i < 100; ++i) {
+        const randomNumber = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+        arr.push(randomNumber);
+    }
 
-const func = (value) => console.log(`Value: ${value}`);
-tree.insert(10000);
-tree.insert(20000);
-tree.insert(30000);
+    return arr;
+}
+
+const arr = oneHundredRandomNumbers();
+const tree = new Tree(arr);
 console.log(tree.isBalanced());
-prettyPrint(tree.root);
+
+const logFunc = function(value) {
+    console.log(`Value: ${value}`)
+};
+console.log('Level Order: ');
+tree.levelOrderForEach(logFunc);
+
+console.log('Pre Order: ');
+tree.preOrderForEach(logFunc);
+
+console.log('Post Order: ');
+tree.postOrderForEach(logFunc);
+
+console.log('In Order: ');
+tree.inOrderForEach(logFunc);
+
+tree.insert(123);
+tree.insert(23234234);
+tree.insert(13234234);
+tree.insert(50000);
+tree.insert(44444);
+console.log(tree.isBalanced()); // Should be false
 
 tree.rebalance();
-console.log(tree.isBalanced());
-prettyPrint(tree.root);
+console.log(tree.isBalanced()); // Should be true
+
+console.log('Level Order: ');
+tree.levelOrderForEach(logFunc);
+
+console.log('Pre Order: ');
+tree.preOrderForEach(logFunc);
+
+console.log('Post Order: ');
+tree.postOrderForEach(logFunc);
+
+console.log('In Order: ');
+tree.inOrderForEach(logFunc);
