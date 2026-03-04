@@ -163,6 +163,21 @@ describe('class Tree', () => {
             const sorted = [...new Set(startingArray)].sort((a, b) => a - b);
             expect(received).toEqual(sorted);
         });
+        test('calls callback with values, not Node objects', () => {
+            const callback = jest.fn();
+            tree.inOrderForEach(callback);
+
+            callback.mock.calls.forEach(([arg]) => {
+                expect(typeof arg).toBe('number');
+            });
+        });
+        test('calls callback exactly once per unique node', () => {
+            const callback = jest.fn();
+            tree.inOrderForEach(callback);
+
+            const uniqueValues = new Set(startingArray);
+            expect(callback).toHaveBeenCalledTimes(uniqueValues.size);
+        });
     });
     describe('Tree.preOrderForEach()', () => {
         test('throws an Error when no callback is provided', () => {
@@ -172,6 +187,35 @@ describe('class Tree', () => {
             1, [], 'name', {}
         ])('throws TypeError when passed "%s" to callBack parameter', (input) => {
             expect(() => tree.preOrderForEach(input)).toThrow(TypeError);
+        });
+        test('calls callback with values, not Node objects', () => {
+            const callback = jest.fn();
+            tree.preOrderForEach(callback);
+
+            callback.mock.calls.forEach(([arg]) => {
+                expect(typeof arg).toBe('number');
+            });
+        });
+        test('calls callback exactly once per unique node', () => {
+            const callback = jest.fn();
+            tree.preOrderForEach(callback);
+
+            const uniqueValues = new Set(startingArray);
+            expect(callback).toHaveBeenCalledTimes(uniqueValues.size);
+        });
+        test('traverses in pre-order (root, left subtree, right subtree)', () => {
+            const simpleArr = [4, 2, 6, 1, 3, 5, 7];
+            const simpleTree = new Tree(simpleArr);
+            //       4
+            //      / \
+            //     2   6
+            //    / \ / \
+            //   1  3 5  7
+
+            const received = [];
+            simpleTree.preOrderForEach(val => received.push(val));
+
+            expect(received).toEqual([4, 2, 1, 3, 6, 5, 7]);
         });
     })
 });
