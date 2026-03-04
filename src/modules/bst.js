@@ -118,4 +118,8 @@ export class Tree {
         deleteNode(this.root, value);
         return this;
     }
+
+    levelOrderForEach(callBack) {
+        
+    }
 }
