@@ -119,6 +119,12 @@ export class Tree {
         return this;
     }
 
+    /**
+     * Executes a call back on each node's value in level order.
+     * 
+     * @param {Function} callBack - The callback to be executed on each value
+     * @returns {this} An isntance of the object for chaining.
+     */
     levelOrderForEach(callBack) {
         if (typeof callBack !== 'function') 
             throw new TypeError('method must be passed a call back Function');
