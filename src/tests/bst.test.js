@@ -108,4 +108,9 @@ describe('class Tree', () => {
             for (const value of uniqueNumbers) expect(tree.includes(value)).toBe(true);
         });
     });
+    describe('Tree.levelOrderForEach()', () => {
+        test('throws an Error when no callback is provided', () => {
+            expect(() => tree.levelOrderForEach()).toThrow();
+        });
+    })
 });
