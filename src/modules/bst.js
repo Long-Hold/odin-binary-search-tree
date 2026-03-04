@@ -233,5 +233,15 @@ export class Tree {
 
     depth(value) {
         if (!this.includes(value)) return undefined;
+
+        let currentNode = this.root;
+        let count = 0;
+        while (currentNode.value !== value) {
+            if (value < currentNode.value) currentNode = currentNode.left;
+            else currentNode = currentNode.right;
+            ++count;
+        }
+
+        return count;
     }
 }
