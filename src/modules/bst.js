@@ -76,6 +76,13 @@ export class Tree {
         return this;
     }
 
+    /**
+     * Deletes the Node with the specified value from the tree, if the value does not
+     * exist within the tree, then nothing happens.
+     * 
+     * @param {number} value - The value of the node to delete. 
+     * @returns {this} An insstance of the object for chaining.
+     */
     deleteItem(value) {
         function getSuccessor(currentNode) {
             currentNode = currentNode.right;
