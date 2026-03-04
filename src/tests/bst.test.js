@@ -116,6 +116,6 @@ describe('class Tree', () => {
             1, [], 'name', {}
         ])('throws TypeError when passed "%s" to callBack parameter', (input) => {
             expect(() => tree.levelOrderForEach(input)).toThrow(TypeError);
-        })
-    })
+        });
+    });
 });

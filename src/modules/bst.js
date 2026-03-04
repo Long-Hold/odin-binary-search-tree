@@ -120,6 +120,26 @@ export class Tree {
     }
 
     levelOrderForEach(callBack) {
-        if (typeof callBack !== 'function') throw new TypeError('method must be passed a call back Function');
+        if (typeof callBack !== 'function') 
+            throw new TypeError('method must be passed a call back Function');
+
+        const queue = [];
+        function queueNodes(root, queue, level) {
+            if (root === null) return;
+
+            if (queue.length <= level) queue.push([]);
+            queue[level].push(root.value);
+            callBack(queue[level].pop());
+            queueNodes(root.left, queue, level + 1);
+            queueNodes(root.right, queue, level + 1);
+        }
+
+        queueNodes(this.root, queue, 0);
+
+        return this;
     }
 }
+
+const fun = (value) => console.log("value: ", value);
+const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+console.log(tree.levelOrderForEach(fun));
