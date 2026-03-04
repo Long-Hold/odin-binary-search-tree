@@ -16,5 +16,10 @@ describe('class Tree', () => {
             const arrSet = new Set(startingArray);
             for (const value of arrSet) expect(tree.includes(value)).toBe(true);
         });
+        test('returns false for values that do not exist in the tree', () => {
+            expect(tree.includes(0)).toBe(false);
+            expect(tree.includes(10000)).toBe(false);
+            expect(tree.includes(25)).toBe(false);
+        });
     });
 });
