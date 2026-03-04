@@ -35,12 +35,24 @@ describe('class Tree', () => {
             const noChildTree = new Tree(arr);
             for (let i = 0; i < arr.length; ++i) expect(noChildTree.includes(arr[i])).toBe(true);
 
-            const valueToRemove = arr[4];
+            const valueToRemove = arr[3];
             noChildTree.deleteItem(valueToRemove);
             expect(noChildTree.includes(valueToRemove)).toBe(false);
 
             const newArr = arr.filter(item => item !== valueToRemove);
             for (let i = 0; i < newArr.length; ++i) expect(noChildTree.includes(newArr[i])).toBe(true);
+        });
+        test('deleted node has 1 child', () => {
+            const arr = [50,30,70,20,40,60];
+            const oneChildTree = new Tree(arr);
+            for (let i = 0; i < arr.length; ++i) expect(oneChildTree.includes(arr[i])).toBe(true);
+
+            const valueToRemove = arr[2];
+            oneChildTree.deleteItem(valueToRemove);
+            expect(oneChildTree.includes(valueToRemove)).toBe(false);
+
+            const newArr = arr.filter(item => item !== valueToRemove);
+            for (let i = 0; i < newArr.length; ++i) expect(oneChildTree.includes(newArr[i])).toBe(true);
         });
     });
 });
