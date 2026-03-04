@@ -206,6 +206,13 @@ export class Tree {
         return this;
     }
 
+    /**
+     * Calculates the height of the Node that matches the passed value depending on
+     * how many edges it has.
+     * 
+     * @param {number} value - The value of the Node to find the height of. 
+     * @returns {number | undefined} The height of the node otherwise undefined if it does not exist.
+     */
     height(value) {
         if (!this.includes(value)) return undefined;
 
