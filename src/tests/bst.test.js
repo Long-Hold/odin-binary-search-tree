@@ -346,4 +346,58 @@ describe('class Tree', () => {
             expect(borderline.isBalanced()).toBe(true);
         });
     });
+    describe('Tree.rebalance()', () => {
+        test('tree is still balanced after rebalance() is called on an already balanced tree', () => {
+            expect(tree.isBalanced()).toBe(true);
+            tree.rebalance();
+            expect(tree.isBalanced()).toBe(true);
+        });
+
+        test('returns true for isBalanced() after rebalancing a right-heavy tree', () => {
+            tree.insert(10000);
+            tree.insert(20000);
+            tree.insert(30000);
+            expect(tree.isBalanced()).toBe(false);
+
+            tree.rebalance();
+            expect(tree.isBalanced()).toBe(true);
+        });
+
+        test('returns true for isBalanced() after rebalancing a left-heavy tree', () => {
+            const leftHeavy = new Tree([10]);
+            leftHeavy.insert(8);
+            leftHeavy.insert(6);
+            leftHeavy.insert(4);
+            expect(leftHeavy.isBalanced()).toBe(false);
+
+            leftHeavy.rebalance();
+            expect(leftHeavy.isBalanced()).toBe(true);
+        });
+
+        test('preserves all values after rebalancing', () => {
+            tree.insert(10000);
+            tree.insert(20000);
+            tree.insert(30000);
+            tree.rebalance();
+
+            const allValues = [...new Set(startingArray), 10000, 20000, 30000];
+            for (const value of allValues) expect(tree.includes(value)).toBe(true);
+        });
+
+        test('preserves values in sorted order after rebalancing (inOrder still ascending)', () => {
+            tree.insert(10000);
+            tree.insert(20000);
+            tree.insert(30000);
+            tree.rebalance();
+
+            const received = [];
+            tree.inOrderForEach(val => received.push(val));
+            const sorted = [...received].sort((a, b) => a - b);
+            expect(received).toEqual(sorted);
+        });
+
+        test('is chainable', () => {
+            expect(() => tree.rebalance().isBalanced()).not.toThrow();
+        });
+    });
 });

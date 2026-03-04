@@ -272,4 +272,22 @@ export class Tree {
 
         return checkHeight(this.root) !== -1;
     }
+
+    /**
+     * Rebalances the tree by retrieving all values in order, constructing a new array
+     * and passing it back to buldTree.
+     * 
+     * @returns {this} An instance of the object for chaining.
+     */
+    rebalance() {
+        if (this.isBalanced()) return this;
+
+        const values = []
+        const storeValues = (value) => values.push(value);
+        
+        this.inOrderForEach(storeValues);
+        this.root = this.#buildTree(values);
+
+        return this;
+    }
 }

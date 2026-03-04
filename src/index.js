@@ -15,3 +15,12 @@ const tree = new Tree(startingArray);
 prettyPrint(tree.root);
 
 const func = (value) => console.log(`Value: ${value}`);
+tree.insert(10000);
+tree.insert(20000);
+tree.insert(30000);
+console.log(tree.isBalanced());
+prettyPrint(tree.root);
+
+tree.rebalance();
+console.log(tree.isBalanced());
+prettyPrint(tree.root);
