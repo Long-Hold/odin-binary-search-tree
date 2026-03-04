@@ -33,6 +33,33 @@ describe('class Tree', () => {
             expect(newTree.includes(17)).toBe(true);
             for (let i = 0; i < arr.length; ++i) expect(newTree.includes(arr[i])).toBe(true);
         });
+        test('does not insert a duplicate value into the tree', () => {
+            function mapBST(valuesArr, root) {
+                function traverse(root) {
+                    if (root) {
+                        traverse(root.left);
+                        valuesArr.push(root.value);
+                        traverse(root.right);
+                    }
+                }
+                traverse(root);
+            }
+            const initialList = [];
+            mapBST(initialList, tree.root);
+            expect(initialList.length).not.toBe(0);
+            initialList.forEach(val => expect(tree.includes(val)).toBe(true));
+
+
+            tree.insert(startingArray[0]);
+            tree.insert(startingArray[4]);
+            tree.insert(startingArray[1]);
+            const duplicateList = [];
+            mapBST(duplicateList, tree.root);
+            expect(duplicateList.length).not.toBe(0);
+
+            // They should be the same length if the method rejects duplicate valuess
+            expect(duplicateList.length).toBe(initialList.length);
+        });
     });
     describe('Tree.deleteItem()', () => {
         test('deletes node with no children', () => {
