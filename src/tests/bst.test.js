@@ -308,4 +308,42 @@ describe('class Tree', () => {
             expect(tree.depth(2)).toBe(4);
         });
     });
+    describe('Tree.isBalanced()', () => {
+        test('returns true for the initially built balanced tree', () => {
+            expect(tree.isBalanced()).toBe(true);
+        });
+
+        test('returns true for a single node tree', () => {
+            const singleNode = new Tree([1]);
+            expect(singleNode.isBalanced()).toBe(true);
+        });
+
+        test('returns false after inserting nodes that unbalance the tree', () => {
+            // Forces a right-heavy imbalance on the max side
+            tree.insert(10000);
+            tree.insert(20000);
+            tree.insert(30000);
+            expect(tree.isBalanced()).toBe(false);
+        });
+
+        test('returns false for a manually unbalanced tree (left-heavy)', () => {
+            const leftHeavy = new Tree([10]);
+            leftHeavy.insert(8);
+            leftHeavy.insert(6);
+            leftHeavy.insert(4);
+            expect(leftHeavy.isBalanced()).toBe(false);
+        });
+
+        test('returns true for a perfect binary tree', () => {
+            const perfect = new Tree([4, 2, 6, 1, 3, 5, 7]);
+            expect(perfect.isBalanced()).toBe(true);
+        });
+
+        test('returns true when subtree height difference is exactly 1', () => {
+            // Right subtree one level deeper than left — still valid
+            const borderline = new Tree([4, 2, 6, 1, 3, 5, 7]);
+            borderline.insert(8);
+            expect(borderline.isBalanced()).toBe(true);
+        });
+    });
 });

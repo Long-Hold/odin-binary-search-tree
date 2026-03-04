@@ -251,4 +251,25 @@ export class Tree {
 
         return count;
     }
+
+    /**
+     * Determines if the tree is balanced by calculating the height of each Node.
+     * 
+     * @returns {boolean} True if tree is balanced, False if unbalanced.
+     */
+    isBalanced() {
+        function checkHeight(node) {
+            if (!node) return 0;
+            const left = checkHeight(node.left);
+            if (left === -1) return -1;
+
+            const right = checkHeight(node.right);
+            if (right === -1) return -1;
+
+            if (Math.abs(left - right) > 1) return -1;
+            return 1 + Math.max(left, right);
+        }
+
+        return checkHeight(this.root) !== -1;
+    }
 }
