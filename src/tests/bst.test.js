@@ -100,5 +100,12 @@ describe('class Tree', () => {
             const newArr = arr.filter(item => item !== valueToRemove);
             for (let i = 0; i < newArr.length; ++i) expect(twoChildTree.includes(newArr[i])).toBe(true);
         });
+        test('does nothing if the value does not exist, and tree remains unchanged', () => {
+            const uniqueNumbers = new Set(startingArray);
+            for (const value of uniqueNumbers) expect(tree.includes(value)).toBe(true);
+
+            tree.deleteItem(123123);
+            for (const value of uniqueNumbers) expect(tree.includes(value)).toBe(true);
+        });
     });
 });

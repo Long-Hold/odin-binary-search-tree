@@ -87,6 +87,8 @@ export class Tree {
      * @returns {this} An insstance of the object for chaining.
      */
     deleteItem(value) {
+        // Return early if the value doesn't exist at all
+        if (!this.includes(value)) return this;
         function getSuccessor(currentNode) {
             currentNode = currentNode.right;
             while (currentNode !== null && currentNode.left !== null) 
