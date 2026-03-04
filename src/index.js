@@ -1,31 +1,31 @@
-import { Tree } from "./modules/bst.js";
+import { Tree } from './modules/bst.js';
 
 function prettyPrint(node, prefix = '', isLeft = true) {
-    if (node === null || node === undefined) {
-        return;
-    }
+  if (node === null || node === undefined) {
+    return;
+  }
 
-    prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
-    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
-    prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+  prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.value}`);
+  prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
 }
 
 function oneHundredRandomNumbers() {
-    const arr = [];
-    for (let i = 0; i < 100; ++i) {
-        const randomNumber = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
-        arr.push(randomNumber);
-    }
+  const arr = [];
+  for (let i = 0; i < 100; ++i) {
+    const randomNumber = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
+    arr.push(randomNumber);
+  }
 
-    return arr;
+  return arr;
 }
 
 const arr = oneHundredRandomNumbers();
 const tree = new Tree(arr);
 console.log(tree.isBalanced());
 
-const logFunc = function(value) {
-    console.log(`Value: ${value}`)
+const logFunc = function (value) {
+  console.log(`Value: ${value}`);
 };
 console.log('Level Order: ');
 tree.levelOrderForEach(logFunc);
