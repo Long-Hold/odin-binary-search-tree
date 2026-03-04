@@ -123,19 +123,16 @@ export class Tree {
         if (typeof callBack !== 'function') 
             throw new TypeError('method must be passed a call back Function');
 
-        const queue = [];
-        function queueNodes(root, queue, level) {
-            if (root === null) return;
+        if (this.root === null) return this;
 
-            if (queue.length <= level) queue.push([]);
-            queue[level].push(root.value);
-            callBack(queue[level].pop());
-            queueNodes(root.left, queue, level + 1);
-            queueNodes(root.right, queue, level + 1);
+        const queue = [this.root];
+        while (queue.length > 0) {
+            const node = queue.shift();
+            callBack(node.value);
+            
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
         }
-
-        queueNodes(this.root, queue, 0);
-
         return this;
     }
 }
