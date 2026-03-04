@@ -120,6 +120,6 @@ export class Tree {
     }
 
     levelOrderForEach(callBack) {
-        
+        if (typeof callBack !== 'function') throw new TypeError('method must be passed a call back Function');
     }
 }

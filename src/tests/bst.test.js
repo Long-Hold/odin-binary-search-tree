@@ -112,5 +112,10 @@ describe('class Tree', () => {
         test('throws an Error when no callback is provided', () => {
             expect(() => tree.levelOrderForEach()).toThrow();
         });
+        test.each([
+            1, [], 'name', {}
+        ])('throws TypeError when passed "%s" to callBack parameter', (input) => {
+            expect(() => tree.levelOrderForEach(input)).toThrow(TypeError);
+        })
     })
 });
