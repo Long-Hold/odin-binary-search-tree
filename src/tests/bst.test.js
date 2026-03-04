@@ -147,4 +147,21 @@ describe('class Tree', () => {
             expect(callback).toHaveBeenCalledTimes(uniqueValues.size);
         });
     });
+    describe('Tree.inOrderForEach()', () => {
+        test('throws an Error when no callback is provided', () => {
+            expect(() => tree.inOrderForEach()).toThrow();
+        });
+        test.each([
+            1, [], 'name', {}
+        ])('throws TypeError when passed "%s" to callBack parameter', (input) => {
+            expect(() => tree.inOrderForEach(input)).toThrow(TypeError);
+        });
+        test('traverses in ascending sorted order', () => {
+            const received = [];
+            tree.inOrderForEach(val => received.push(val));
+
+            const sorted = [...new Set(startingArray)].sort((a, b) => a - b);
+            expect(received).toEqual(sorted);
+        });
+    });
 });
