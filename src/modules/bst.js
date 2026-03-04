@@ -231,6 +231,13 @@ export class Tree {
         return findHeight(currentNode);
     }
 
+    /**
+     * Finds the depth of the Node with the matching value by counting how many Nodes need
+     * to be traversed to locate it.
+     * 
+     * @param {number} value - The value of the Node to calculate the depth of. 
+     * @returns {number | undefined} The depth count of the node or undefined if it can't be found.
+     */
     depth(value) {
         if (!this.includes(value)) return undefined;
 
