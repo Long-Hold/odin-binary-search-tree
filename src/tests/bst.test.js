@@ -288,4 +288,11 @@ describe('class Tree', () => {
             expect(tree.height(4)).toBe(1);
         });
     });
+    describe('Tree.depth()', () => {
+        test('returns undefined for a value that does not exist', () => {
+            expect(tree.depth(9999)).toBe(undefined);
+            tree.deleteItem(4);
+            expect(tree.depth(4)).toBe(undefined);
+        });
+    });
 });

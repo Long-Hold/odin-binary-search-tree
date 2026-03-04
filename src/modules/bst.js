@@ -230,4 +230,8 @@ export class Tree {
 
         return findHeight(currentNode);
     }
+
+    depth(value) {
+        if (!this.includes(value)) return undefined;
+    }
 }
