@@ -302,6 +302,10 @@ describe('class Tree', () => {
             {input: 6345, result: 3},
         ])('returns $result when passed $input', ({input, result}) => {
             expect(tree.depth(input)).toBe(result);
-        })
+        });
+        test('returns the depth of a newly added node', () => {
+            tree.insert(2);
+            expect(tree.depth(2)).toBe(4);
+        });
     });
 });
